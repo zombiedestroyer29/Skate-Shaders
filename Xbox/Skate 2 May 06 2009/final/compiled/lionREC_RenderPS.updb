@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shader-pdb pdbHint="4e4a0000-49650358-25c3bd6f" version="7645">
+ <files>
+  <file id="0" path="" time="0000004d-00b39f48">
+#line 11 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4x4 g_matVP    ;
+
+#line 12 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4x4 g_matV    ;
+
+#line 13 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4x4 g_matP    ;
+
+#line 15 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_vLightDir    ;
+
+#line 16 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_vSunHazeDir    ;
+
+#line 17 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_vViewPos    ;
+
+#line 18 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_ViewDotLight    ;
+
+#line 26 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_locattributes [ 2 ]    ;
+
+#line 6 "D:/sk82/main/code/ng/render/shaders/Source/lionREC_params.fxh"
+sampler i_textureSampler   ;
+
+#line 7 "D:/sk82/main/code/ng/render/shaders/Source/lionREC_params.fxh"
+struct VS_IN
+#line 8 "D:/sk82/main/code/ng/render/shaders/Source/lionREC_params.fxh"
+{
+#line 9 "D:/sk82/main/code/ng/render/shaders/Source/lionREC_params.fxh"
+float3 ObjPos : POSITION   ; float4 Color : COLOR   ; float2 UV : TEXCOORD0   ;
+#line 12 "D:/sk82/main/code/ng/render/shaders/Source/lionREC_params.fxh"
+} ;
+
+#line 14 "D:/sk82/main/code/ng/render/shaders/Source/lionREC_params.fxh"
+struct PS_IN
+#line 15 "D:/sk82/main/code/ng/render/shaders/Source/lionREC_params.fxh"
+{
+#line 16 "D:/sk82/main/code/ng/render/shaders/Source/lionREC_params.fxh"
+float4 ProjPos : POSITION   ; float4 Color : TEXCOORD0   ; float4 UVFog : TEXCOORD1   ;
+#line 19 "D:/sk82/main/code/ng/render/shaders/Source/lionREC_params.fxh"
+} ;
+
+#line 3 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+half2 ComputeFogFactor ( half4 worldPos    , half4 viewPos    )  
+#line 4 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+{
+#line 5 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+return half2 ( worldPos.y, length ( viewPos.xz ) ) ;
+#line 6 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+}
+
+#line 8 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+void RenderVS ( VS_IN In    , out PS_IN Out    )  
+#line 9 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+{
+#line 10 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+Out.ProjPos = mul ( half4 ( In.ObjPos, 1 ) , g_matVP ) ;
+#line 11 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+Out.UVFog.xy = In.UV ;
+#line 12 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+Out.Color = In.Color ;
+#line 13 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+Out.UVFog.zw = half2 ( 0.0, 0.0 ) ;
+#line 14 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+}
+
+#line 16 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+half4 RenderPS ( PS_IN In    ) : COLOR 
+#line 17 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+{
+#line 18 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+half4 vColor   = tex2D ( i_textureSampler , In.UVFog.xy ) ;
+#line 19 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+half4 outcol   = vColor*In.Color ;
+#line 21 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+return outcol ;
+#line 22 "D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx"
+}
+</file>
+  <file id="1" path="D:/sk82/main/code/ng/render/shaders/Source/lionREC.fx" time="01c93fd0-14b04953" />
+ </files>
+ <tool name="Compiler">
+  <defines>
+   <define name="SHADER_FINAL" value="" />
+   <define name="rwgDEVICE_XBOX2" value="" />
+  </defines>
+  <arguments>
+   <argument name="/Zi" value="true" />
+   <argument name="/Vd" value="false" />
+   <argument name="/Xu0_deprecated" value="false" />
+   <argument name="/Odu_deprecated" value="false" />
+   <argument name="/XOd_" value="false" />
+   <argument name="/XOu" value="false" />
+   <argument name="/Xmaxtempreg" value="0" />
+   <argument name="PsSampBase" value="0" />
+   <argument name="PsSampCount" value="0" />
+   <argument name="VsSampBase" value="0" />
+   <argument name="VsSampCount" value="0" />
+   <argument name="VsInstCount" value="0" />
+   <argument name="PsInstCount" value="0" />
+   <argument name="/Od" value="false" />
+   <argument name="/Zpr" value="false" />
+   <argument name="/Zpc" value="false" />
+   <argument name="/Gpp" value="false" />
+   <argument name="/Op" value="false" />
+   <argument name="/Gfa" value="false" />
+   <argument name="/Gfp" value="false" />
+   <argument name="/XZc:zeroInit" value="false" />
+   <argument name="/XVe" value="false" />
+   <argument name="/Xbe:3-" value="false" />
+   <argument name="/Xbe:1-" value="false" />
+   <argument name="/XQInomaskedexports" value="false" />
+   <argument name="/XOautoz" value="false" />
+  </arguments>
+ </tool>
+ <shaders>
+  <shader entrypoint="RenderPS" target="ps_3_0" ZPass="0" pdbHint="4e4a0000-49650358-25c3bd6f">
+   <constanttable>
+    <constant register="s0">
+     <type name="i_textureSampler" class="object" type="sampler2D" />
+    </constant>
+   </constanttable>
+   <sourcemap>
+    <statement pc="2" file="1" line="18" scope="-1" lastinstruction="0" />
+    <statement pc="0.1" file="1" line="18" scope="-1" lastinstruction="0" />
+    <statement pc="3" file="1" line="19" scope="-1" lastinstruction="0" />
+   </sourcemap>
+   <variables>
+   </variables>
+   <variableDebugInfo>
+   </variableDebugInfo>
+   <scopes>
+   </scopes>
+   <funcInfo>
+    <function id="0" name="RenderPS" retID="24">
+     <parameter id="23" />
+    </function>
+    <function id="1" name="RenderVS" retID="22">
+     <parameter id="20" />
+     <parameter id="21" />
+    </function>
+    <function id="2" name="ComputeFogFactor" retID="19">
+     <parameter id="17" />
+     <parameter id="18" />
+    </function>
+   </funcInfo>
+   <funcEntryExitInfo>
+   </funcEntryExitInfo>
+   <VfetchInfo>
+   </VfetchInfo>
+   <InterpolatorInfo>
+    <Interpolator Register="0" Semantic="0x50" Mask="xyzw" />
+    <Interpolator Register="1" Semantic="0x51" Mask="xyzw" />
+   </InterpolatorInfo>
+   <LiteralFloats>
+   </LiteralFloats>
+   <LiteralInts>
+   </LiteralInts>
+   <LiteralBools>
+   </LiteralBools>
+  </shader>
+ </shaders>
+</shader-pdb>

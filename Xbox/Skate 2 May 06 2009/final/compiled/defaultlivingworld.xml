@@ -1,0 +1,78 @@
+<File version="0.01.0">
+<Header vbCount="2" pbCount="2" tecCount="3"/>
+<VertexProgram>
+<Program id="0" size="1180" name="defaultlivingworld_defaultVS.vpo">
+</Program>
+<Program id="2" size="884" name="defaultlivingworld_simpleVS.vpo">
+</Program>
+</VertexProgram>
+<PixelProgram>
+<Program id="1" size="1120" name="defaultlivingworld_defaultPS.fpo">
+</Program>
+<Program id="3" size="284" name="defaultlivingworld_shadowPS.fpo">
+</Program>
+</PixelProgram>
+<Technique name="default">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="STENCILREF" value="255"/>
+		<State name="STENCILWRITEMASK" value="255"/>
+		<State name="CCW_STENCILPASS" value="REPLACE"/>
+		<State name="CCW_STENCILWRITEMASK" value="255"/>
+		<State name="STENCILMASK" value="255"/>
+		<State name="CCW_STENCILMASK" value="255"/>
+		<State name="STENCILENABLE" value="True"/>
+		<State name="CULLMODE" value="FRONT"/>
+		<State name="STENCILPASS" value="REPLACE"/>
+	</Pass>
+	</Technique>
+<Technique name="shadow">
+	<Pass id="0">
+		<VertexShader index="2"/>
+		<PixelShader index="3"/>
+		<State name="STENCILREF" value="255"/>
+		<State name="STENCILWRITEMASK" value="255"/>
+		<State name="COLORWRITE" value="0"/>
+		<State name="CCW_STENCILPASS" value="REPLACE"/>
+		<State name="CCW_STENCILWRITEMASK" value="255"/>
+		<State name="CCW_STENCILMASK" value="255"/>
+		<State name="STENCILMASK" value="255"/>
+		<State name="STENCILENABLE" value="True"/>
+		<State name="CULLMODE" value="BACK"/>
+		<State name="STENCILPASS" value="REPLACE"/>
+	</Pass>
+	</Technique>
+<Technique name="ghost">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="CULLMODE" value="FRONT"/>
+		<State name="COLORWRITE" value="0"/>
+	</Pass>
+	<Pass id="1">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="BLENDOPALPHA" value="ADD"/>
+		<State name="STENCILMASK" value="255"/>
+		<State name="SRCBLEND" value="SRCALPHA"/>
+		<State name="STENCILWRITEMASK" value="255"/>
+		<State name="ALPHAFUNC" value="GREATEREQUAL"/>
+		<State name="ALPHABLEND" value="true"/>
+		<State name="CULLMODE" value="FRONT"/>
+		<State name="STENCILREF" value="255"/>
+		<State name="ALPHATESTENABLE" value="true"/>
+		<State name="STENCILPASS" value="REPLACE"/>
+		<State name="SRCBLENDALPHA" value="SRCALPHA"/>
+		<State name="STENCILENABLE" value="true"/>
+		<State name="CCW_STENCILPASS" value="REPLACE"/>
+		<State name="DESTBLENDALPHA" value="INVSRCALPHA"/>
+		<State name="CCW_STENCILMASK" value="255"/>
+		<State name="CCW_STENCILWRITEMASK" value="255"/>
+		<State name="ALPHAREF" value="1"/>
+		<State name="BLENDOP" value="ADD"/>
+		<State name="DESTBLEND" value="INVSRCALPHA"/>
+		<State name="COLORWRITE" value="RGB"/>
+	</Pass>
+	</Technique>
+</File>

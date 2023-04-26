@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shader-pdb pdbHint="4e4a0000-4266ee3b-57822a93" version="7645">
+ <files>
+  <file id="0" path="" time="0000004d-00b39f48">
+#line 11 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4x4 g_matVP    ;
+
+#line 12 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4x4 g_matV    ;
+
+#line 13 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4x4 g_matP    ;
+
+#line 15 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_vLightDir    ;
+
+#line 16 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_vSunHazeDir    ;
+
+#line 17 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_vViewPos    ;
+
+#line 18 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_ViewDotLight    ;
+
+#line 26 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_locattributes [ 2 ]    ;
+
+#line 37 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 i_debugparams [ 9 ]    ;
+
+#line 6 "D:/sk82/main/code/ng/render/shaders/Source/vp6_params.fxh"
+float4x4 i_matWorld    ;
+
+#line 7 "D:/sk82/main/code/ng/render/shaders/Source/vp6_params.fxh"
+sampler i_textureSampler   ;
+
+#line 8 "D:/sk82/main/code/ng/render/shaders/Source/vp6_params.fxh"
+sampler i_textureSampler1   ;
+
+#line 9 "D:/sk82/main/code/ng/render/shaders/Source/vp6_params.fxh"
+sampler i_textureSampler2   ;
+
+#line 13 "D:/sk82/main/code/ng/render/shaders/Source/vp6_params.fxh"
+struct VS_IN
+#line 14 "D:/sk82/main/code/ng/render/shaders/Source/vp6_params.fxh"
+{
+#line 15 "D:/sk82/main/code/ng/render/shaders/Source/vp6_params.fxh"
+float4 Pos : POSITION   ; float2 UV : TEXCOORD0   ;
+#line 17 "D:/sk82/main/code/ng/render/shaders/Source/vp6_params.fxh"
+} ;
+
+#line 18 "D:/sk82/main/code/ng/render/shaders/Source/vp6_params.fxh"
+struct PS_IN
+#line 19 "D:/sk82/main/code/ng/render/shaders/Source/vp6_params.fxh"
+{
+#line 20 "D:/sk82/main/code/ng/render/shaders/Source/vp6_params.fxh"
+float4 Pos : POSITION   ; float2 UV : TEXCOORD0   ;
+#line 22 "D:/sk82/main/code/ng/render/shaders/Source/vp6_params.fxh"
+} ;
+
+#line 13 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+void defaultVS ( VS_IN In    , out PS_IN Out    )  
+#line 14 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+{
+#line 15 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+half4 pos   = mul ( In.Pos , i_matWorld ) ;
+#line 17 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+Out.Pos = mul ( pos , g_matVP ) ;
+#line 18 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+Out.UV = In.UV ;
+#line 19 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+}
+
+#line 21 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+half4 defaultPS ( PS_IN In    ) : COLOR 
+#line 22 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+{
+#line 23 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+half3x3 yuvToRgbMatrix   = { 1.164383, 0, +1.596027, 1.164383, -0.391762, -0.812968, 1.164383, +2.017232, 0 , } ;
+#line 30 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+half3 yuv    ;
+#line 31 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+yuv.r = tex2D ( i_textureSampler , In.UV ).g-( 16./256 ) ;
+#line 32 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+yuv.g = tex2D ( i_textureSampler1 , In.UV ).g-0.5 ;
+#line 33 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+yuv.b = tex2D ( i_textureSampler2 , In.UV ).g-0.5 ;
+#line 35 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+half3 result   = mul ( yuvToRgbMatrix , yuv ) ;
+#line 37 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+return half4 ( result, 1 ) ;
+#line 38 "D:/sk82/main/code/ng/render/shaders/Source/vp6.fx"
+}
+</file>
+  <file id="1" path="D:/sk82/main/code/ng/render/shaders/Source/vp6.fx" time="01c93fcf-e16e25d3" />
+ </files>
+ <tool name="Compiler">
+  <defines>
+   <define name="SHADER_DEBUG" value="" />
+   <define name="rwgDEVICE_XBOX2" value="" />
+  </defines>
+  <arguments>
+   <argument name="/Zi" value="true" />
+   <argument name="/Vd" value="false" />
+   <argument name="/Xu0_deprecated" value="false" />
+   <argument name="/Odu_deprecated" value="false" />
+   <argument name="/XOd_" value="false" />
+   <argument name="/XOu" value="false" />
+   <argument name="/Xmaxtempreg" value="0" />
+   <argument name="PsSampBase" value="0" />
+   <argument name="PsSampCount" value="0" />
+   <argument name="VsSampBase" value="0" />
+   <argument name="VsSampCount" value="0" />
+   <argument name="VsInstCount" value="0" />
+   <argument name="PsInstCount" value="0" />
+   <argument name="/Od" value="false" />
+   <argument name="/Zpr" value="false" />
+   <argument name="/Zpc" value="false" />
+   <argument name="/Gpp" value="false" />
+   <argument name="/Op" value="false" />
+   <argument name="/Gfa" value="false" />
+   <argument name="/Gfp" value="false" />
+   <argument name="/XZc:zeroInit" value="false" />
+   <argument name="/XVe" value="false" />
+   <argument name="/Xbe:3-" value="false" />
+   <argument name="/Xbe:1-" value="false" />
+   <argument name="/XQInomaskedexports" value="false" />
+   <argument name="/XOautoz" value="false" />
+  </arguments>
+ </tool>
+ <shaders>
+  <shader entrypoint="defaultPS" target="ps_3_0" ZPass="0" pdbHint="4e4a0000-4266ee3b-57822a93">
+   <constanttable>
+    <constant register="s0">
+     <type name="i_textureSampler" class="object" type="sampler2D" />
+    </constant>
+    <constant register="s1">
+     <type name="i_textureSampler1" class="object" type="sampler2D" />
+    </constant>
+    <constant register="s2">
+     <type name="i_textureSampler2" class="object" type="sampler2D" />
+    </constant>
+   </constanttable>
+   <sourcemap>
+    <statement pc="2" file="1" line="31" scope="-1" lastinstruction="0" />
+    <statement pc="3" file="1" line="33" scope="-1" lastinstruction="0" />
+    <statement pc="4" file="1" line="32" scope="-1" lastinstruction="0" />
+    <statement pc="0.1" file="1" line="32" scope="-1" lastinstruction="0" />
+    <statement pc="5" file="1" line="31" scope="-1" lastinstruction="0" />
+    <statement pc="6" file="1" line="35" scope="-1" lastinstruction="0" />
+    <statement pc="7" file="1" line="35" scope="-1" lastinstruction="0" />
+    <statement pc="8" file="1" line="35" scope="-1" lastinstruction="0" />
+   </sourcemap>
+   <variables>
+   </variables>
+   <variableDebugInfo>
+   </variableDebugInfo>
+   <scopes>
+   </scopes>
+   <funcInfo>
+    <function id="0" name="defaultPS" retID="24">
+     <parameter id="23" />
+    </function>
+    <function id="1" name="defaultVS" retID="21">
+     <parameter id="19" />
+     <parameter id="20" />
+    </function>
+   </funcInfo>
+   <funcEntryExitInfo>
+   </funcEntryExitInfo>
+   <VfetchInfo>
+   </VfetchInfo>
+   <InterpolatorInfo>
+    <Interpolator Register="0" Semantic="0x50" Mask="xy" />
+   </InterpolatorInfo>
+   <LiteralFloats>
+    <Float Register="252" value0="0" value1="0" value2="0" value3="0" />
+    <Float Register="253" value0="0" value1="0" value2="0" value3="0" />
+    <Float Register="254" value0="1.1643831" value1="-0.39176199" value2="-0.0625" value3="-0.5" />
+    <Float Register="255" value0="1.596027" value1="-0.81296802" value2="2.0172319" value3="0" />
+   </LiteralFloats>
+   <LiteralInts>
+   </LiteralInts>
+   <LiteralBools>
+   </LiteralBools>
+  </shader>
+ </shaders>
+</shader-pdb>

@@ -1,0 +1,3 @@
+GXSetNumChans(0);
+GXSetNumTexGens(1);
+GXSetTexCoordGen(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY);

@@ -1,0 +1,45 @@
+<File version="0.01.0">
+<Header vbCount="1" pbCount="1" tecCount="1"/>
+<VertexProgram>
+<Program id="0" size="1016" name="crowdimposter_defaultVS.vpo">
+</Program>
+</VertexProgram>
+<PixelProgram>
+<Program id="1" size="760" name="crowdimposter_defaultPS.fpo">
+</Program>
+</PixelProgram>
+<Technique name="default">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="COLORWRITE" value="RGB"/>
+		<State name="DESTBLEND" value="INVSRCALPHA"/>
+		<State name="SRCBLEND" value="SRCALPHA"/>
+		<State name="ZENABLE" value="true"/>
+		<State name="ALPHABLEND" value="true"/>
+		<State name="ALPHATESTENABLE" value="true"/>
+		<State name="ZWRITEENABLE" value="true"/>
+		<State name="ALPHAFUNC" value="GREATEREQUAL"/>
+		<State name="ALPHAREF" value="30"/>
+		<Sampler name="i_stencil">
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="ADDRESSU" value="CLAMP"/>
+			<SamplerState name="ADDRESSW" value="CLAMP"/>
+			<SamplerState name="ADDRESSV" value="CLAMP"/>
+			<SamplerState name="MAGFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="LINEAR"/>
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+		</Sampler>
+		<Sampler name="i_diffuse">
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="ADDRESSU" value="CLAMP"/>
+			<SamplerState name="ADDRESSW" value="CLAMP"/>
+			<SamplerState name="ADDRESSV" value="CLAMP"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+</File>

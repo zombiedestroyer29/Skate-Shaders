@@ -1,0 +1,2 @@
+GXSetNumTexGens(1);
+GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX3x4, GX_TG_POS, GX_IDENTITY, GX_FALSE, GX_PTTEXMTX0);		// DMO Areal Lightmap Projection

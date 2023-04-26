@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shader-pdb pdbHint="4e4a0000-a38beb17-4be7a5e2" version="7645">
+ <files>
+  <file id="0" path="" time="0000004d-00b39f48">
+#line 11 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4x4 g_matVP    ;
+
+#line 12 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4x4 g_matV    ;
+
+#line 13 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4x4 g_matP    ;
+
+#line 15 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_vLightDir    ;
+
+#line 16 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_vSunHazeDir    ;
+
+#line 17 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_vViewPos    ;
+
+#line 18 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_ViewDotLight    ;
+
+#line 26 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_locattributes [ 2 ]    ;
+
+#line 37 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 i_debugparams [ 9 ]    ;
+
+#line 4 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+struct VS_IN
+#line 5 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+{
+#line 6 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+float4 Pos : POSITION   ;
+#line 7 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+} ;
+
+#line 8 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+struct PS_IN
+#line 9 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+{
+#line 10 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+float4 Pos : POSITION   ;
+#line 11 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+} ;
+
+#line 13 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+void defaultVS ( VS_IN In    , out PS_IN Out    )  
+#line 14 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+{
+#line 15 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+float4 P   = float4 ( In.Pos.xyz, 1.0 ) ;
+#line 16 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+Out.Pos = mul ( P , g_matVP ) ;
+#line 17 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+}
+
+#line 19 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+half4 defaultPS ( PS_IN In    ) : COLOR 
+#line 20 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+{
+#line 21 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+return half4 ( 0, 0, 0, 1 ) ;
+#line 22 "D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx"
+}
+</file>
+  <file id="1" path="D:/sk82/main/code/ng/render/shaders/Source/WorldShadow.fx" time="01c93fcf-e20458be" />
+ </files>
+ <tool name="Compiler">
+  <defines>
+   <define name="SHADER_DEBUG" value="" />
+   <define name="rwgDEVICE_XBOX2" value="" />
+  </defines>
+  <arguments>
+   <argument name="/Zi" value="true" />
+   <argument name="/Vd" value="false" />
+   <argument name="/Xu0_deprecated" value="false" />
+   <argument name="/Odu_deprecated" value="false" />
+   <argument name="/XOd_" value="false" />
+   <argument name="/XOu" value="false" />
+   <argument name="/Xmaxtempreg" value="0" />
+   <argument name="PsSampBase" value="0" />
+   <argument name="PsSampCount" value="0" />
+   <argument name="VsSampBase" value="0" />
+   <argument name="VsSampCount" value="0" />
+   <argument name="VsInstCount" value="0" />
+   <argument name="PsInstCount" value="0" />
+   <argument name="/Od" value="false" />
+   <argument name="/Zpr" value="false" />
+   <argument name="/Zpc" value="false" />
+   <argument name="/Gpp" value="false" />
+   <argument name="/Op" value="false" />
+   <argument name="/Gfa" value="false" />
+   <argument name="/Gfp" value="false" />
+   <argument name="/XZc:zeroInit" value="false" />
+   <argument name="/XVe" value="false" />
+   <argument name="/Xbe:3-" value="false" />
+   <argument name="/Xbe:1-" value="false" />
+   <argument name="/XQInomaskedexports" value="false" />
+   <argument name="/XOautoz" value="false" />
+  </arguments>
+ </tool>
+ <shaders>
+  <shader entrypoint="defaultVS" target="vs_3_0" ZPass="0" pdbHint="4e4a0000-a38beb17-4be7a5e2">
+   <constanttable>
+    <constant register="c0" count="4">
+     <type name="g_matVP" class="matrix_columns" type="float" rows="4" columns="4" />
+    </constant>
+   </constanttable>
+   <sourcemap>
+    <statement pc="3" file="1" line="13" scope="-1" lastinstruction="0" />
+    <statement pc="0.1" file="1" line="13" scope="-1" lastinstruction="0" />
+    <statement pc="4" file="1" line="16" scope="-1" lastinstruction="0" />
+    <statement pc="5" file="1" line="16" scope="-1" lastinstruction="0" />
+    <statement pc="6" file="1" line="16" scope="-1" lastinstruction="0" />
+    <statement pc="7" file="1" line="16" scope="-1" lastinstruction="0" />
+    <statement pc="1.1" file="1" line="16" scope="-1" lastinstruction="0" />
+    <statement pc="2.0" file="1" line="13" scope="-1" lastinstruction="0" />
+   </sourcemap>
+   <variables>
+   </variables>
+   <variableDebugInfo>
+   </variableDebugInfo>
+   <scopes>
+   </scopes>
+   <funcInfo>
+    <function id="0" name="defaultPS" retID="18">
+     <parameter id="17" />
+    </function>
+    <function id="1" name="defaultVS" retID="15">
+     <parameter id="13" />
+     <parameter id="14" />
+    </function>
+   </funcInfo>
+   <funcEntryExitInfo>
+   </funcEntryExitInfo>
+   <VfetchInfo>
+    <vfetch Address="3" Register="0" DestSwizzle="xyz1" Semantic="0x00" End="false" />
+   </VfetchInfo>
+   <InterpolatorInfo>
+   </InterpolatorInfo>
+   <LiteralFloats>
+   </LiteralFloats>
+   <LiteralInts>
+   </LiteralInts>
+   <LiteralBools>
+   </LiteralBools>
+  </shader>
+ </shaders>
+</shader-pdb>

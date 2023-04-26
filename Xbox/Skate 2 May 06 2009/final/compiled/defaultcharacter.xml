@@ -1,0 +1,206 @@
+<File version="0.01.0">
+<Header vbCount="2" pbCount="5" tecCount="6"/>
+<VertexProgram>
+<Program id="0" size="1392" name="defaultcharacter_defaultVS.vpo">
+</Program>
+<Program id="4" size="880" name="defaultcharacter_simpleVS.vpo">
+</Program>
+</VertexProgram>
+<PixelProgram>
+<Program id="1" size="2480" name="defaultcharacter_defaultPS.fpo">
+</Program>
+<Program id="2" size="2468" name="defaultcharacter_nisPS.fpo">
+</Program>
+<Program id="3" size="1084" name="defaultcharacter_shPS.fpo">
+</Program>
+<Program id="5" size="280" name="defaultcharacter_shadowPS.fpo">
+</Program>
+<Program id="6" size="2096" name="defaultcharacter_crowdPS.fpo">
+</Program>
+</PixelProgram>
+<Technique name="default">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="STENCILREF" value="255"/>
+		<State name="STENCILWRITEMASK" value="255"/>
+		<State name="CCW_STENCILWRITEMASK" value="255"/>
+		<State name="CCW_STENCILPASS" value="REPLACE"/>
+		<State name="CCW_STENCILMASK" value="255"/>
+		<State name="STENCILMASK" value="255"/>
+		<State name="STENCILENABLE" value="True"/>
+		<State name="CULLMODE" value="FRONT"/>
+		<State name="STENCILPASS" value="REPLACE"/>
+		<Sampler name="i_normal">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+		<Sampler name="i_diffuse">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+<Technique name="nis">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="2"/>
+		<State name="STENCILREF" value="255"/>
+		<State name="STENCILWRITEMASK" value="255"/>
+		<State name="CCW_STENCILWRITEMASK" value="255"/>
+		<State name="CCW_STENCILPASS" value="REPLACE"/>
+		<State name="CCW_STENCILMASK" value="255"/>
+		<State name="STENCILMASK" value="255"/>
+		<State name="STENCILENABLE" value="True"/>
+		<State name="CULLMODE" value="FRONT"/>
+		<State name="STENCILPASS" value="REPLACE"/>
+		<Sampler name="i_normal">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+		<Sampler name="i_diffuse">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+<Technique name="shlighting">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="3"/>
+		<State name="STENCILREF" value="255"/>
+		<State name="STENCILWRITEMASK" value="255"/>
+		<State name="CCW_STENCILPASS" value="REPLACE"/>
+		<State name="CCW_STENCILWRITEMASK" value="255"/>
+		<State name="STENCILMASK" value="255"/>
+		<State name="CCW_STENCILMASK" value="255"/>
+		<State name="STENCILENABLE" value="True"/>
+		<State name="CULLMODE" value="FRONT"/>
+		<State name="STENCILPASS" value="REPLACE"/>
+		<Sampler name="i_normal">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+<Technique name="shadow">
+	<Pass id="0">
+		<VertexShader index="4"/>
+		<PixelShader index="5"/>
+		<State name="STENCILREF" value="255"/>
+		<State name="STENCILWRITEMASK" value="255"/>
+		<State name="COLORWRITE" value="0"/>
+		<State name="CCW_STENCILPASS" value="REPLACE"/>
+		<State name="CCW_STENCILWRITEMASK" value="255"/>
+		<State name="CCW_STENCILMASK" value="255"/>
+		<State name="STENCILMASK" value="255"/>
+		<State name="STENCILENABLE" value="True"/>
+		<State name="CULLMODE" value="BACK"/>
+		<State name="STENCILPASS" value="REPLACE"/>
+	</Pass>
+	</Technique>
+<Technique name="ghost">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="CULLMODE" value="FRONT"/>
+		<State name="COLORWRITE" value="0"/>
+		<Sampler name="i_normal">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+		<Sampler name="i_diffuse">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+	</Pass>
+	<Pass id="1">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="BLENDOPALPHA" value="ADD"/>
+		<State name="STENCILMASK" value="255"/>
+		<State name="SRCBLEND" value="SRCALPHA"/>
+		<State name="STENCILWRITEMASK" value="255"/>
+		<State name="ALPHAFUNC" value="GREATEREQUAL"/>
+		<State name="ALPHABLEND" value="true"/>
+		<State name="CULLMODE" value="FRONT"/>
+		<State name="STENCILREF" value="255"/>
+		<State name="ALPHATESTENABLE" value="true"/>
+		<State name="STENCILPASS" value="REPLACE"/>
+		<State name="SRCBLENDALPHA" value="SRCALPHA"/>
+		<State name="STENCILENABLE" value="true"/>
+		<State name="CCW_STENCILPASS" value="REPLACE"/>
+		<State name="DESTBLENDALPHA" value="INVSRCALPHA"/>
+		<State name="CCW_STENCILMASK" value="255"/>
+		<State name="CCW_STENCILWRITEMASK" value="255"/>
+		<State name="ALPHAREF" value="1"/>
+		<State name="BLENDOP" value="ADD"/>
+		<State name="DESTBLEND" value="INVSRCALPHA"/>
+		<State name="COLORWRITE" value="RGB"/>
+		<Sampler name="i_normal">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+		<Sampler name="i_diffuse">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+<Technique name="crowd">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="6"/>
+		<State name="STENCILREF" value="255"/>
+		<State name="STENCILWRITEMASK" value="255"/>
+		<State name="CCW_STENCILPASS" value="REPLACE"/>
+		<State name="CCW_STENCILWRITEMASK" value="255"/>
+		<State name="STENCILMASK" value="255"/>
+		<State name="CCW_STENCILMASK" value="255"/>
+		<State name="STENCILENABLE" value="True"/>
+		<State name="CULLMODE" value="FRONT"/>
+		<State name="STENCILPASS" value="REPLACE"/>
+		<Sampler name="i_normal">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+		<Sampler name="i_diffuse">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+</File>

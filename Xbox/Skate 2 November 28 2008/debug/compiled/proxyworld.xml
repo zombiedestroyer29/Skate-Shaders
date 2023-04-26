@@ -1,0 +1,18 @@
+<File version="0.01.0">
+<Header vbCount="1" pbCount="1" tecCount="1"/>
+<VertexProgram>
+<Program id="0" size="784" name="proxyworld_defaultVS.vpo">
+</Program>
+</VertexProgram>
+<PixelProgram>
+<Program id="1" size="716" name="proxyworld_defaultPS.fpo">
+</Program>
+</PixelProgram>
+<Technique name="default">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="CULLMODE" value="FRONT"/>
+	</Pass>
+	</Technique>
+</File>

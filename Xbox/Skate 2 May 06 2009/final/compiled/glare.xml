@@ -1,0 +1,35 @@
+<File version="0.01.0">
+<Header vbCount="1" pbCount="1" tecCount="1"/>
+<VertexProgram>
+<Program id="0" size="788" name="glare_defaultVS.vpo">
+</Program>
+</VertexProgram>
+<PixelProgram>
+<Program id="1" size="348" name="glare_defaultPS.fpo">
+</Program>
+</PixelProgram>
+<Technique name="default">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="BLENDOPALPHA" value="ADD"/>
+		<State name="SRCBLEND" value="ONE"/>
+		<State name="ALPHAFUNC" value="GREATEREQUAL"/>
+		<State name="ALPHABLEND" value="TRUE"/>
+		<State name="ZENABLE" value="TRUE"/>
+		<State name="ZWRITEENABLE" value="FALSE"/>
+		<State name="ALPHATOMASKENABLE" value="false"/>
+		<State name="ALPHATESTENABLE" value="true"/>
+		<State name="SRCBLENDALPHA" value="ONE"/>
+		<State name="DESTBLENDALPHA" value="ONE"/>
+		<State name="ALPHAREF" value="1"/>
+		<State name="BLENDOP" value="ADD"/>
+		<State name="DESTBLEND" value="ONE"/>
+		<Sampler name="i_diffuse">
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="8"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+</File>

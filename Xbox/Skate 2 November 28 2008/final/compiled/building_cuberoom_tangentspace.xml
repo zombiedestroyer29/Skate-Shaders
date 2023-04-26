@@ -1,0 +1,88 @@
+<File version="0.01.0">
+<Header vbCount="1" pbCount="1" tecCount="1"/>
+<VertexProgram>
+<Program id="0" size="1204" name="building_cuberoom_tangentspace_defaultVS.vpo">
+</Program>
+</VertexProgram>
+<PixelProgram>
+<Program id="1" size="2936" name="building_cuberoom_tangentspace_defaultPS.fpo">
+</Program>
+</PixelProgram>
+<Technique name="default">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="CULLMODE" value="FRONT"/>
+		<Sampler name="i_specular">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+		<Sampler name="i_diffuse">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+		<Sampler name="i_environment">
+			<SamplerState name="MIPFILTER" value="POINT"/>
+			<SamplerState name="ADDRESSU" value="CLAMP"/>
+			<SamplerState name="ADDRESSW" value="CLAMP"/>
+			<SamplerState name="ADDRESSV" value="CLAMP"/>
+			<SamplerState name="MAGFILTER" value="LINEAR"/>
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MINFILTER" value="LINEAR"/>
+		</Sampler>
+		<Sampler name="i_normal">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+		<Sampler name="i_detail">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+		<Sampler name="i_lightmap">
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="ADDRESSU" value="CLAMP"/>
+			<SamplerState name="ADDRESSV" value="CLAMP"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+		</Sampler>
+		<Sampler name="i_macrooverlay">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+		<Sampler name="i_environmentInterior">
+			<SamplerState name="MAXANISOTROPY" value="1"/>
+			<SamplerState name="ADDRESSU" value="CLAMP"/>
+			<SamplerState name="ADDRESSW" value="CLAMP"/>
+			<SamplerState name="ADDRESSV" value="CLAMP"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+		</Sampler>
+		<Sampler name="i_chromaticity">
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="ADDRESSU" value="CLAMP"/>
+			<SamplerState name="ADDRESSV" value="CLAMP"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+</File>

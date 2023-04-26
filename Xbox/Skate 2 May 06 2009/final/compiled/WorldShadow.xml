@@ -1,0 +1,29 @@
+<File version="0.01.0">
+<Header vbCount="1" pbCount="1" tecCount="1"/>
+<VertexProgram>
+<Program id="0" size="404" name="WorldShadow_defaultVS.vpo">
+</Program>
+</VertexProgram>
+<PixelProgram>
+<Program id="1" size="276" name="WorldShadow_defaultPS.fpo">
+</Program>
+</PixelProgram>
+<Technique name="default">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="STENCILMASK" value="255"/>
+		<State name="STENCILWRITEMASK" value="255"/>
+		<State name="ALPHABLEND" value="FALSE"/>
+		<State name="CULLMODE" value="FRONT"/>
+		<State name="STENCILREF" value="255"/>
+		<State name="ALPHATESTENABLE" value="false"/>
+		<State name="STENCILPASS" value="REPLACE"/>
+		<State name="STENCILENABLE" value="True"/>
+		<State name="CCW_STENCILPASS" value="REPLACE"/>
+		<State name="CCW_STENCILMASK" value="255"/>
+		<State name="CCW_STENCILWRITEMASK" value="255"/>
+		<State name="COLORWRITE" value="0"/>
+	</Pass>
+	</Technique>
+</File>

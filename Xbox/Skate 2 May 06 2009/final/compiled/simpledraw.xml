@@ -1,0 +1,111 @@
+<File version="0.01.0">
+<Header vbCount="8" pbCount="5" tecCount="9"/>
+<VertexProgram>
+<Program id="0" size="536" name="simpledraw_DepthOnlyVS.vpo">
+</Program>
+<Program id="2" size="556" name="simpledraw_p_sc.vpo">
+</Program>
+<Program id="4" size="592" name="simpledraw_p_sc_uv.vpo">
+</Program>
+<Program id="6" size="512" name="simpledraw_p_c.vpo">
+</Program>
+<Program id="8" size="552" name="simpledraw_p_c_uv.vpo">
+</Program>
+<Program id="10" size="848" name="simpledraw_p_n_sc.vpo">
+</Program>
+<Program id="11" size="888" name="simpledraw_p_n_sc_uv.vpo">
+</Program>
+<Program id="12" size="828" name="simpledraw_p_n_c.vpo">
+</Program>
+</VertexProgram>
+<PixelProgram>
+<Program id="1" size="280" name="simpledraw_NullPixelShader.fpo">
+</Program>
+<Program id="3" size="284" name="simpledraw_SimpleDrawSCPS.fpo">
+</Program>
+<Program id="5" size="372" name="simpledraw_SimpleDrawUVSCPS.fpo">
+</Program>
+<Program id="7" size="284" name="simpledraw_SimpleDrawPS.fpo">
+</Program>
+<Program id="9" size="368" name="simpledraw_SimpleDrawUVPS.fpo">
+</Program>
+</PixelProgram>
+<Technique name="DepthOnly">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="ZFUNC" value="ALWAYS"/>
+		<State name="ZWRITEENABLE" value="true"/>
+		<State name="COLORWRITE" value="0"/>
+		<State name="ZENABLE" value="true"/>
+	</Pass>
+	</Technique>
+<Technique name="NS0_CS0_UVS0">
+	<Pass id="0">
+		<VertexShader index="2"/>
+		<PixelShader index="3"/>
+	</Pass>
+	</Technique>
+<Technique name="NS0_CS0_UVS1">
+	<Pass id="0">
+		<VertexShader index="4"/>
+		<PixelShader index="5"/>
+		<Sampler name="i_textureSampler">
+			<SamplerState name="ADDRESSW" value="CLAMP"/>
+			<SamplerState name="ADDRESSV" value="CLAMP"/>
+			<SamplerState name="ADDRESSU" value="CLAMP"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+<Technique name="NS0_CS1_UVS0">
+	<Pass id="0">
+		<VertexShader index="6"/>
+		<PixelShader index="7"/>
+	</Pass>
+	</Technique>
+<Technique name="NS0_CS1_UVS1">
+	<Pass id="0">
+		<VertexShader index="8"/>
+		<PixelShader index="9"/>
+		<Sampler name="i_textureSampler">
+			<SamplerState name="ADDRESSW" value="CLAMP"/>
+			<SamplerState name="ADDRESSV" value="CLAMP"/>
+			<SamplerState name="ADDRESSU" value="CLAMP"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+<Technique name="NS1_CS0_UVS0">
+	<Pass id="0">
+		<VertexShader index="10"/>
+		<PixelShader index="7"/>
+	</Pass>
+	</Technique>
+<Technique name="NS1_CS0_UVS1">
+	<Pass id="0">
+		<VertexShader index="11"/>
+		<PixelShader index="9"/>
+		<Sampler name="i_textureSampler">
+			<SamplerState name="ADDRESSW" value="CLAMP"/>
+			<SamplerState name="ADDRESSV" value="CLAMP"/>
+			<SamplerState name="ADDRESSU" value="CLAMP"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+<Technique name="NS1_CS1_UVS0">
+	<Pass id="0">
+		<VertexShader index="12"/>
+		<PixelShader index="7"/>
+	</Pass>
+	</Technique>
+<Technique name="NS1_CS1_UVS1">
+	<Pass id="0">
+		<VertexShader index="11"/>
+		<PixelShader index="9"/>
+		<Sampler name="i_textureSampler">
+			<SamplerState name="ADDRESSW" value="CLAMP"/>
+			<SamplerState name="ADDRESSV" value="CLAMP"/>
+			<SamplerState name="ADDRESSU" value="CLAMP"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+</File>

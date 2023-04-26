@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shader-pdb pdbHint="4e4a0000-189c0a86-f65eb1e9" version="7645">
+ <files>
+  <file id="0" path="" time="0000004d-00b39f48">
+#line 11 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4x4 g_matVP    ;
+
+#line 12 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4x4 g_matV    ;
+
+#line 13 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4x4 g_matP    ;
+
+#line 15 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_vLightDir    ;
+
+#line 16 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_vSunHazeDir    ;
+
+#line 17 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_vViewPos    ;
+
+#line 18 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_ViewDotLight    ;
+
+#line 26 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_locattributes [ 2 ]    ;
+
+#line 37 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 i_debugparams [ 9 ]    ;
+
+#line 6 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter_params.fxh"
+struct VS_IN
+#line 7 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter_params.fxh"
+{
+#line 8 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter_params.fxh"
+float3 Pos : POSITION   ; float2 UV : TEXCOORD0   ;
+#line 10 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter_params.fxh"
+} ;
+
+#line 12 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter_params.fxh"
+struct PS_IN
+#line 13 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter_params.fxh"
+{
+#line 14 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter_params.fxh"
+float4 Pos : POSITION   ; float2 UV : TEXCOORD0   ; float4 Fog : TEXCOORD1   ;
+#line 17 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter_params.fxh"
+} ;
+
+#line 19 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter_params.fxh"
+sampler i_diffuse   = sampler_state { MinFilter  = ANISOTROPIC ; MagFilter  = ANISOTROPIC ; Mipfilter  = LINEAR ; MaxAnisotropy  = 4 ; TrilinearThreshold  = THREEEIGHTHS ; AddressU  = CLAMP ; AddressV  = CLAMP ; AddressW  = CLAMP ; };
+
+#line 31 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter_params.fxh"
+sampler i_stencil   = sampler_state { MinFilter  = LINEAR ; MagFilter  = LINEAR ; Mipfilter  = LINEAR ; TrilinearThreshold  = THREEEIGHTHS ; AddressU  = CLAMP ; AddressV  = CLAMP ; AddressW  = CLAMP ; };
+
+#line 42 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter_params.fxh"
+float4x4 i_matModelView    ;
+
+#line 43 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter_params.fxh"
+float4x4 i_matModelTarget    ;
+
+#line 44 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter_params.fxh"
+float4x4 i_matTexture    ;
+
+#line 46 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter_params.fxh"
+float4 i_colorize_red    ;
+
+#line 47 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter_params.fxh"
+float4 i_colorize_blue    ;
+
+#line 4 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+float4 g_fPcaMean    ;
+
+#line 5 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+float4 g_fPcaWeightsR_0    ;
+
+#line 6 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+float4 g_fPcaWeightsR_1    ;
+
+#line 7 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+float4 g_fPcaWeightsG_0    ;
+
+#line 8 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+float4 g_fPcaWeightsG_1    ;
+
+#line 9 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+float4 g_fPcaWeightsB_0    ;
+
+#line 10 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+float4 g_fPcaWeightsB_1    ;
+
+#line 12 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half3 GetPCANormal ( sampler n1    , sampler n2    , half2 uv    , half tonedown    )  
+#line 13 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+{
+#line 14 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half3 normalIn   = half3 ( 0, 1, 0 ) ;
+#line 15 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half4 component0   = tex2D ( n1 , uv )*2-1 ;
+#line 16 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half4 component1   = tex2D ( n2 , uv )*2-1 ;
+#line 18 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half3 pcaNormal    ;
+#line 19 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+pcaNormal.x = g_fPcaMean.x+( dot ( component0 , g_fPcaWeightsR_0 )+dot ( component1 , g_fPcaWeightsR_1 ) ) ;
+#line 20 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+pcaNormal.y = g_fPcaMean.y+( dot ( component0 , g_fPcaWeightsG_0 )+dot ( component1 , g_fPcaWeightsG_1 ) ) ;
+#line 21 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+pcaNormal.z = g_fPcaMean.z+( dot ( component0 , g_fPcaWeightsB_0 )+dot ( component1 , g_fPcaWeightsB_1 ) ) ;
+#line 24 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+pcaNormal = pcaNormal*2-1 ;
+#line 27 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+return normalize ( lerp ( normalIn , pcaNormal , tonedown ) ) ;
+#line 28 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+}
+
+#line 30 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half4 MoveToLinearSpace ( half4 color    )  
+#line 31 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+{
+#line 32 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+return color*color ;
+#line 33 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+}
+
+#line 35 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half3 MoveToLinearSpaceRGB ( half3 color    )  
+#line 36 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+{
+#line 37 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+return color*color ;
+#line 38 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+}
+
+#line 40 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half MoveToLinearSpaceHalf ( half color    )  
+#line 41 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+{
+#line 42 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+return color*color ;
+#line 43 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+}
+
+#line 46 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half3 GetNormal ( float3 InTangent    , float3 InBinormal    )  
+#line 47 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+{
+#line 48 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+return cross ( InTangent , InBinormal ) ;
+#line 49 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+}
+
+#line 51 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half3 DecodeQuarterDirection ( half2 input    )  
+#line 52 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+{
+#line 53 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+const float two_power_0_25   = 1.1892071150 ;
+#line 54 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+const float two_power_0_50   = 1.4142135623 ;
+#line 55 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+const float two_power_1_50   = 2.8284271247 ;
+#line 57 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+input *= two_power_0_25 ;
+#line 58 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+float zz   = two_power_1_50-dot ( input.xy , input.xy ) ;
+#line 59 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half3 dir   = half3 ( input.xy, sqrt ( zz ) ) ;
+#line 60 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+dir = dir.zzz*dir.xyz+half3 ( 0, 0, -two_power_0_50 ) ;
+#line 61 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+dir = dir.zzz*dir.xyz+half3 ( 0, 0, -1 ) ;
+#line 62 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+return dir ;
+#line 63 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+}
+
+#line 65 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+void DecodeQuarterDirection_2 ( float4 input    , out float3 vec1    , out float3 vec2    )  
+#line 66 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+{
+#line 67 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+float2 zz    ;
+#line 68 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+const float two_power_0_25   = 1.1892071150 ;
+#line 69 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+const float two_power_0_50   = 1.4142135623 ;
+#line 70 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+const float two_power_1_50   = 2.8284271247 ;
+#line 72 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+input.xyzw *= two_power_0_25 ;
+#line 73 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+zz.x = dot ( input.xy , input.xy ) ;
+#line 74 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+zz.y = dot ( input.zw , input.zw ) ;
+#line 75 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+zz.xy = two_power_1_50.xx-zz.xy ;
+#line 77 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+vec1 = half3 ( input.xy, sqrt ( zz.x ) ) ;
+#line 78 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+vec1 = vec1.zzz*vec1.xyz+half3 ( 0, 0, -two_power_0_50 ) ;
+#line 79 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+vec1 = vec1.zzz*vec1.xyz+half3 ( 0, 0, -1 ) ;
+#line 81 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+vec2 = half3 ( input.zw, sqrt ( zz.y ) ) ;
+#line 82 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+vec2 = vec2.zzz*vec2.xyz+half3 ( 0, 0, -two_power_0_50 ) ;
+#line 83 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+vec2 = vec2.zzz*vec2.xyz+half3 ( 0, 0, -1 ) ;
+#line 85 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+}
+
+#line 88 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half3 DoubleVectorAngle ( half3 input    )  
+#line 89 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+{
+#line 90 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+return ( 2*input.zzz )*input.xyz+half3 ( 0, 0, -1 ) ;
+#line 91 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+}
+
+#line 93 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half3 DecodeQuarterDirection_SlowReference ( half2 compressed    )  
+#line 94 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+{
+#line 95 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+compressed /= sqrt ( 2 ) ;
+#line 96 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half3 result    ;
+#line 97 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+result.xy = compressed ;
+#line 98 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+result.z = sqrt ( 1.0-( compressed.x*compressed.x )-( compressed.y*compressed.y ) ) ;
+#line 99 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+result = DoubleVectorAngle ( result ) ;
+#line 100 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+result = DoubleVectorAngle ( result ) ;
+#line 101 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+return result ;
+#line 102 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+}
+
+#line 105 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+float3 DecodeTangentBinormal ( half4 compressed    , out float3 vBinormal    , out float3 vTangent    , float fix    )  
+#line 106 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+{
+#line 109 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+DecodeQuarterDirection_2 ( compressed , vTangent , vBinormal ) ;
+#line 111 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+float3 normal   = GetNormal ( vTangent , vBinormal ) ;
+#line 112 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half signbit   = ( fix&gt;=0 ) ? 1 : -1 ;
+#line 113 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+normal *= signbit ;
+#line 114 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+return normal ;
+#line 115 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+}
+
+#line 116 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half3x3 GetTangentMatrix ( half3 tangent    , half3 binormal    , half3 normal    )  
+#line 117 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+{
+#line 118 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+return half3x3 ( tangent, binormal, normal ) ;
+#line 119 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+}
+
+#line 121 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half3 TransformToWorldFromTangent_normalize ( half3 incoming    , half3x3 tbn    )  
+#line 122 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+{
+#line 123 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+return normalize ( mul ( incoming , tbn ) ) ;
+#line 124 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+}
+
+#line 126 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half3 TransformToWorldFromTangent ( half3 incoming    , half3x3 tbn    )  
+#line 127 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+{
+#line 128 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+return normalize ( mul ( incoming , tbn ) ) ;
+#line 129 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+}
+
+#line 131 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half3 TransformToTangentFromWorld ( half3 incoming    , half3x3 tbn    )  
+#line 132 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+{
+#line 133 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+return normalize ( mul ( tbn , incoming ) ) ;
+#line 134 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+}
+
+#line 136 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+half CalculateSpecPower ( half specpow    , half ecc    )  
+#line 137 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+{
+#line 138 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+return clamp ( 2*specpow*ecc , 5 , 1000 ) ;
+#line 139 "D:/sk82/main/code/ng/render/shaders/Source/common_functions.fxh"
+}
+
+#line 8 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+float HDR_exposure   = 0.5f ;
+
+#line 10 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+half Fog ( half fogfactor    , half4 min_taper_max_power    )  
+#line 11 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+{
+#line 12 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+float fog   = saturate ( ( fogfactor-min_taper_max_power.x )*min_taper_max_power.y ) ;
+#line 13 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+fog = saturate ( pow ( fog , min_taper_max_power.w ) ) ;
+#line 15 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+return min ( fog , min_taper_max_power.z ) ;
+#line 16 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+}
+
+#line 18 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+float4 g_FogK1    ;
+
+#line 19 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+float4 g_FogColour    ;
+
+#line 21 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+half4 ComputeFogFactor ( half4 Pos    , float4x4 matV    )  
+#line 22 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+{
+#line 23 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+half4 Out    ;
+#line 25 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+float3 viewdir   = Pos.xyz-g_vViewPos.xyz ;
+#line 26 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+float dist   = length ( viewdir ) ;
+#line 28 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+float f1   = saturate ( ( dist*g_FogK1.x )+g_FogK1.y ) ;
+#line 29 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+f1 = pow ( f1 , g_FogK1.z ) ;
+#line 31 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+Out.rgba = ( g_FogColour*f1 )+float4 ( 0, 0, 0, 1 ) ;
+#line 32 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+return Out ;
+#line 33 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+}
+
+#line 36 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+half4 MoveFromLinearSpace ( half4 color    )  
+#line 37 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+{
+#line 46 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+return sqrt ( color ) ;
+#line 48 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+}
+
+#line 51 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+half4 tonemap ( half4 x    )  
+#line 52 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+{
+#line 53 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+half4 ret    ;
+#line 55 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+ret = saturate ( half4 ( 1, 1, 1, 1 )-x ) ;
+#line 56 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+ret *= ret ;
+#line 57 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+ret = max ( ( x*0.25 )+0.75 , half4 ( 1, 1, 1, 1 ) )-ret ;
+#line 58 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+return ret*0.5 ;
+#line 59 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+}
+
+#line 62 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+half4 PS_Bloom_Tone ( half4 FinalCol    , half exposure    )  
+#line 63 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+{
+#line 65 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+half4 tonecol   = FinalCol*exposure ;
+#line 66 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+tonecol = tonemap ( tonecol ) ;
+#line 67 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+return MoveFromLinearSpace ( tonecol ) ;
+#line 68 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+}
+
+#line 70 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+half4 PS_Bloom ( half4 FinalCol    , half exposure    )  
+#line 71 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+{
+#line 73 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+half4 tonecol   = FinalCol*exposure ;
+#line 74 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+return tonemap ( tonecol ) ;
+#line 75 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+}
+
+#line 77 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+half4 PS_Fog_Bloom_Tone ( half4 FinalCol    , half4 FogFactor    , half exposure    )  
+#line 78 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+{
+#line 80 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+half4 tonecol   = ( FinalCol*FogFactor.a+FogFactor.rgba )*exposure ;
+#line 81 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+tonecol = tonemap ( tonecol ) ;
+#line 83 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+return MoveFromLinearSpace ( tonecol ) ;
+#line 84 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+}
+
+#line 86 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+half4 PS_Fog_Bloom ( half4 FinalCol    , half4 FogFactor    , half exposure    )  
+#line 87 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+{
+#line 89 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+half4 tonecol   = ( FinalCol*FogFactor.a+FogFactor.rgba )*exposure ;
+#line 90 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+return tonemap ( tonecol ) ;
+#line 92 "D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh"
+}
+
+#line 5 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+void defaultVS ( VS_IN In    , out PS_IN Out    )  
+#line 6 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+{
+#line 7 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+float4 p   = float4 ( In.Pos.xyz, 1.0 ) ;
+#line 8 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+float4 uv   = float4 ( In.UV.x, In.UV.y, 0.0, 1.0 ) ;
+#line 9 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+float4 worldPos   = mul ( mul ( p , i_matModelTarget ) , i_matModelView ) ;
+#line 11 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+Out.Pos = mul ( worldPos , g_matVP ) ;
+#line 12 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+Out.UV = mul ( uv , i_matTexture ) ;
+#line 13 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+Out.Fog = ComputeFogFactor ( worldPos , g_matV ) ;
+#line 14 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+}
+
+#line 16 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+float4 defaultPS ( PS_IN In    ) : COLOR 
+#line 17 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+{
+#line 18 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+half4 cDiffuse   = tex2D ( i_diffuse , In.UV ) ;
+#line 19 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+half4 cStencil   = tex2D ( i_stencil , In.UV ) ;
+#line 20 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+half4 imposter   = cDiffuse ;
+#line 22 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+half4 colorized   = imposter.x*i_colorize_red+imposter.z*i_colorize_blue ;
+#line 23 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+imposter.xyz = ( ( 1.0-imposter.a )*colorized.xyz )+( imposter.a*imposter.xyz ) ;
+#line 25 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+half exposure   = 1.0 ;
+#line 26 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+half4 outcolor   = PS_Fog_Bloom_Tone ( imposter , In.Fog , exposure ) ;
+#line 27 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+outcolor.a = cStencil.b ;
+#line 28 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+return outcolor ;
+#line 29 "D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx"
+}
+</file>
+  <file id="1" path="D:/sk82/main/code/ng/render/shaders/Source/crowdimposter.fx" time="01c9182d-3ab9448f" />
+  <file id="2" path="D:/sk82/main/code/ng/render/shaders/Source/postfx_functions.fxh" time="01c91f5d-f51e8aee" />
+ </files>
+ <tool name="Compiler">
+  <defines>
+   <define name="SHADER_DEBUG" value="" />
+   <define name="rwgDEVICE_XBOX2" value="" />
+  </defines>
+  <arguments>
+   <argument name="/Zi" value="true" />
+   <argument name="/Vd" value="false" />
+   <argument name="/Xu0_deprecated" value="false" />
+   <argument name="/Odu_deprecated" value="false" />
+   <argument name="/XOd_" value="false" />
+   <argument name="/XOu" value="false" />
+   <argument name="/Xmaxtempreg" value="0" />
+   <argument name="PsSampBase" value="0" />
+   <argument name="PsSampCount" value="0" />
+   <argument name="VsSampBase" value="0" />
+   <argument name="VsSampCount" value="0" />
+   <argument name="VsInstCount" value="0" />
+   <argument name="PsInstCount" value="0" />
+   <argument name="/Od" value="false" />
+   <argument name="/Zpr" value="false" />
+   <argument name="/Zpc" value="false" />
+   <argument name="/Gpp" value="false" />
+   <argument name="/Op" value="false" />
+   <argument name="/Gfa" value="false" />
+   <argument name="/Gfp" value="false" />
+   <argument name="/XZc:zeroInit" value="false" />
+   <argument name="/XVe" value="false" />
+   <argument name="/Xbe:3-" value="false" />
+   <argument name="/Xbe:1-" value="false" />
+   <argument name="/XQInomaskedexports" value="false" />
+   <argument name="/XOautoz" value="false" />
+  </arguments>
+ </tool>
+ <shaders>
+  <shader entrypoint="defaultPS" target="ps_3_0" ZPass="0" pdbHint="4e4a0000-189c0a86-f65eb1e9">
+   <constanttable>
+    <constant register="c1">
+     <type name="i_colorize_blue" class="vector" type="float" columns="4" />
+    </constant>
+    <constant register="c0">
+     <type name="i_colorize_red" class="vector" type="float" columns="4" />
+    </constant>
+    <constant register="s0">
+     <type name="i_diffuse" class="object" type="sampler2D" />
+    </constant>
+    <constant register="s1">
+     <type name="i_stencil" class="object" type="sampler2D" />
+    </constant>
+   </constanttable>
+   <sourcemap>
+    <statement pc="3" file="1" line="19" scope="-1" lastinstruction="0" />
+    <statement pc="4" file="1" line="18" scope="-1" lastinstruction="0" />
+    <statement pc="0.1" file="1" line="18" scope="-1" lastinstruction="0" />
+    <statement pc="5" file="1" line="23" scope="-1" lastinstruction="0" />
+    <statement pc="6" file="1" line="22" scope="-1" lastinstruction="0" />
+    <statement pc="7" file="1" line="22" scope="-1" lastinstruction="0" />
+    <statement pc="8" file="1" line="23" scope="-1" lastinstruction="0" />
+    <statement pc="9" file="2" line="80" scope="-1" lastinstruction="0" />
+    <statement pc="10" file="2" line="55" scope="-1" lastinstruction="0" />
+    <statement pc="11" file="2" line="57" scope="-1" lastinstruction="0" />
+    <statement pc="12" file="2" line="57" scope="-1" lastinstruction="0" />
+    <statement pc="13" file="2" line="56" scope="-1" lastinstruction="0" />
+    <statement pc="14" file="2" line="58" scope="-1" lastinstruction="0" />
+    <statement pc="15" file="2" line="46" scope="-1" lastinstruction="0" />
+    <statement pc="16" file="2" line="46" scope="-1" lastinstruction="0" />
+    <statement pc="17" file="2" line="46" scope="-1" lastinstruction="0" />
+    <statement pc="18" file="1" line="28" scope="-1" lastinstruction="0" />
+   </sourcemap>
+   <variables>
+   </variables>
+   <variableDebugInfo>
+   </variableDebugInfo>
+   <scopes>
+   </scopes>
+   <funcInfo>
+    <function id="0" name="defaultPS" retID="135">
+     <parameter id="134" />
+    </function>
+    <function id="1" name="defaultVS" retID="130">
+     <parameter id="128" />
+     <parameter id="129" />
+    </function>
+    <function id="2" name="PS_Fog_Bloom" retID="126">
+     <parameter id="123" />
+     <parameter id="124" />
+     <parameter id="125" />
+    </function>
+    <function id="3" name="PS_Fog_Bloom_Tone" retID="121">
+     <parameter id="118" />
+     <parameter id="119" />
+     <parameter id="120" />
+    </function>
+    <function id="4" name="PS_Bloom" retID="116">
+     <parameter id="114" />
+     <parameter id="115" />
+    </function>
+    <function id="5" name="PS_Bloom_Tone" retID="112">
+     <parameter id="110" />
+     <parameter id="111" />
+    </function>
+    <function id="6" name="tonemap" retID="108">
+     <parameter id="107" />
+    </function>
+    <function id="7" name="MoveFromLinearSpace" retID="106">
+     <parameter id="105" />
+    </function>
+    <function id="8" name="ComputeFogFactor" retID="100">
+     <parameter id="98" />
+     <parameter id="99" />
+    </function>
+    <function id="9" name="Fog" retID="94">
+     <parameter id="92" />
+     <parameter id="93" />
+    </function>
+    <function id="10" name="CalculateSpecPower" retID="90">
+     <parameter id="88" />
+     <parameter id="89" />
+    </function>
+    <function id="11" name="TransformToTangentFromWorld" retID="87">
+     <parameter id="85" />
+     <parameter id="86" />
+    </function>
+    <function id="12" name="TransformToWorldFromTangent" retID="84">
+     <parameter id="82" />
+     <parameter id="83" />
+    </function>
+    <function id="13" name="TransformToWorldFromTangent_normalize" retID="81">
+     <parameter id="79" />
+     <parameter id="80" />
+    </function>
+    <function id="14" name="GetTangentMatrix" retID="78">
+     <parameter id="75" />
+     <parameter id="76" />
+     <parameter id="77" />
+    </function>
+    <function id="15" name="DecodeTangentBinormal" retID="72">
+     <parameter id="68" />
+     <parameter id="69" />
+     <parameter id="70" />
+     <parameter id="71" />
+    </function>
+    <function id="16" name="DecodeQuarterDirection_SlowReference" retID="66">
+     <parameter id="65" />
+    </function>
+    <function id="17" name="DoubleVectorAngle" retID="64">
+     <parameter id="63" />
+    </function>
+    <function id="18" name="DecodeQuarterDirection_2" retID="58">
+     <parameter id="55" />
+     <parameter id="56" />
+     <parameter id="57" />
+    </function>
+    <function id="19" name="DecodeQuarterDirection" retID="49">
+     <parameter id="48" />
+    </function>
+    <function id="20" name="GetNormal" retID="47">
+     <parameter id="45" />
+     <parameter id="46" />
+    </function>
+    <function id="21" name="MoveToLinearSpaceHalf" retID="44">
+     <parameter id="43" />
+    </function>
+    <function id="22" name="MoveToLinearSpaceRGB" retID="42">
+     <parameter id="41" />
+    </function>
+    <function id="23" name="MoveToLinearSpace" retID="40">
+     <parameter id="39" />
+    </function>
+    <function id="24" name="GetPCANormal" retID="34">
+     <parameter id="30" />
+     <parameter id="31" />
+     <parameter id="32" />
+     <parameter id="33" />
+    </function>
+   </funcInfo>
+   <funcEntryExitInfo>
+   </funcEntryExitInfo>
+   <VfetchInfo>
+   </VfetchInfo>
+   <InterpolatorInfo>
+    <Interpolator Register="0" Semantic="0x50" Mask="xy" />
+    <Interpolator Register="1" Semantic="0x51" Mask="xyzw" />
+   </InterpolatorInfo>
+   <LiteralFloats>
+    <Float Register="252" value0="0" value1="0" value2="0" value3="0" />
+    <Float Register="253" value0="0" value1="0" value2="0" value3="0" />
+    <Float Register="254" value0="0" value1="0" value2="0" value3="0" />
+    <Float Register="255" value0="0.75" value1="0.5" value2="1" value3="0.25" />
+   </LiteralFloats>
+   <LiteralInts>
+   </LiteralInts>
+   <LiteralBools>
+   </LiteralBools>
+  </shader>
+ </shaders>
+</shader-pdb>

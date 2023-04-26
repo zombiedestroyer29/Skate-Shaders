@@ -1,0 +1,53 @@
+<File version="0.01.0">
+<Header vbCount="1" pbCount="2" tecCount="2"/>
+<VertexProgram>
+<Program id="0" size="1076" name="spline_defaultVS.vpo">
+</Program>
+</VertexProgram>
+<PixelProgram>
+<Program id="1" size="376" name="spline_darkenPS.fpo">
+</Program>
+<Program id="2" size="376" name="spline_defaultPS.fpo">
+</Program>
+</PixelProgram>
+<Technique name="darken">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="DESTBLEND" value="INVSRCALPHA"/>
+		<State name="SRCBLEND" value="SRCALPHA"/>
+		<State name="ZENABLE" value="true"/>
+		<State name="BLENDOPALPHA" value="ADD"/>
+		<State name="DESTBLENDALPHA" value="INVSRCALPHA"/>
+		<State name="BLENDOP" value="ADD"/>
+		<State name="ALPHABLEND" value="true"/>
+		<State name="SRCBLENDALPHA" value="SRCALPHA"/>
+		<State name="ZWRITEENABLE" value="false"/>
+		<Sampler name="i_diffuse">
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="8"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+<Technique name="default">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="2"/>
+		<State name="DESTBLEND" value="ONE"/>
+		<State name="SRCBLEND" value="ONE"/>
+		<State name="ZENABLE" value="true"/>
+		<State name="BLENDOPALPHA" value="ADD"/>
+		<State name="DESTBLENDALPHA" value="ONE"/>
+		<State name="BLENDOP" value="ADD"/>
+		<State name="ALPHABLEND" value="true"/>
+		<State name="SRCBLENDALPHA" value="ONE"/>
+		<State name="ZWRITEENABLE" value="false"/>
+		<Sampler name="i_diffuse">
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="8"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+</File>

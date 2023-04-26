@@ -1,0 +1,29 @@
+<File version="0.01.0">
+<Header vbCount="1" pbCount="1" tecCount="1"/>
+<VertexProgram>
+<Program id="0" size="456" name="minimap_VtxShader.vpo">
+</Program>
+</VertexProgram>
+<PixelProgram>
+<Program id="1" size="660" name="minimap_PixShader.fpo">
+</Program>
+</PixelProgram>
+<Technique name="default">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="ALPHABLEND" value="true"/>
+		<State name="SRCBLEND" value="SRCALPHA"/>
+		<State name="ZWRITEENABLE" value="false"/>
+		<State name="ZENABLE" value="false"/>
+		<State name="DESTBLEND" value="INVSRCALPHA"/>
+		<Sampler name="i_textureSampler">
+			<SamplerState name="ADDRESSV" value="WRAP"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MAGFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="POINT"/>
+			<SamplerState name="ADDRESSU" value="WRAP"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+</File>

@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shader-pdb pdbHint="4e4a0000-139956bf-d213bf96" version="7645">
+ <files>
+  <file id="0" path="" time="0000004d-00b39f48">
+#line 11 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4x4 g_matVP    ;
+
+#line 12 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4x4 g_matV    ;
+
+#line 13 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4x4 g_matP    ;
+
+#line 15 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_vLightDir    ;
+
+#line 16 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_vSunHazeDir    ;
+
+#line 17 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_vViewPos    ;
+
+#line 18 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_ViewDotLight    ;
+
+#line 26 "D:/sk82/main/code/ng/render/shaders/Source/global_params.fxh"
+float4 g_locattributes [ 2 ]    ;
+
+#line 6 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4x4 i_matWorld    ;
+
+#line 7 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4 i_ConstantColour    ;
+
+#line 8 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4 i_ConstantLightPos    ;
+
+#line 9 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4 i_ConstantDepth    ;
+
+#line 10 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+sampler i_textureSampler   = sampler_state { AddressU  = CLAMP ; AddressV  = CLAMP ; AddressW  = CLAMP ; };
+
+#line 17 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+struct VS_IN_CLR_NORM_UV
+#line 18 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+{
+#line 19 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4 Pos : POSITION   ; float4 Norm : NORMSIMPLEDRAWAL   ; float4 Colour : COLOR   ; float2 UV : TEXCOORD0   ;
+#line 23 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+} ;
+
+#line 25 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+struct VS_IN_CLR_NORM
+#line 26 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+{
+#line 27 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4 Pos : POSITION   ; float4 Norm : NORMAL   ; float4 Colour : COLOR   ;
+#line 30 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+} ;
+
+#line 31 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+struct VS_IN_NORM_UV
+#line 32 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+{
+#line 33 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4 Pos : POSITION   ; float4 Norm : NORMAL   ; float2 UV : TEXCOORD0   ;
+#line 36 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+} ;
+
+#line 37 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+struct VS_IN_CLR_UV
+#line 38 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+{
+#line 39 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4 Pos : POSITION   ; float4 Colour : COLOR   ; float2 UV : TEXCOORD0   ;
+#line 42 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+} ;
+
+#line 43 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+struct VS_IN_UV
+#line 44 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+{
+#line 45 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4 Pos : POSITION   ; float2 UV : TEXCOORD0   ;
+#line 47 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+} ;
+
+#line 48 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+struct VS_IN_NORM
+#line 49 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+{
+#line 50 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4 Pos : POSITION   ; float4 Norm : NORMAL   ;
+#line 52 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+} ;
+
+#line 53 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+struct VS_IN_CLR
+#line 54 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+{
+#line 55 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4 Pos : POSITION   ; float4 Colour : COLOR   ;
+#line 57 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+} ;
+
+#line 58 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+struct VS_IN
+#line 59 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+{
+#line 60 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4 Pos : POSITION   ;
+#line 61 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+} ;
+
+#line 63 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+struct PS_IN_UV
+#line 64 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+{
+#line 65 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4 Pos : POSITION   ; float2 UV : TEXCOORD0   ; float4 Colour : TEXCOORD1   ;
+#line 68 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+} ;
+
+#line 69 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+struct PS_IN
+#line 70 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+{
+#line 71 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4 Pos : POSITION   ; float4 Colour : TEXCOORD0   ;
+#line 73 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+} ;
+
+#line 74 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+struct PS_IN_SC_UV
+#line 75 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+{
+#line 76 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4 Pos : POSITION   ; float2 UV : TEXCOORD0   ; float4 Colour : TEXCOORD1   ;
+#line 79 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+} ;
+
+#line 80 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+struct PS_IN_SC
+#line 81 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+{
+#line 82 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+float4 Pos : POSITION   ; float4 Colour : TEXCOORD0   ;
+#line 84 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw_params.fxh"
+} ;
+
+#line 5 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+void p_c ( VS_IN_CLR In    , out PS_IN Out    )  
+#line 6 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+{
+#line 7 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float4 P   = mul ( In.Pos , i_matWorld ) ;
+#line 8 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Pos = mul ( P , g_matVP ) ;
+#line 9 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Colour = In.Colour ;
+#line 10 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+}
+
+#line 11 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+void p_c_uv ( VS_IN_CLR_UV In    , out PS_IN_UV Out    )  
+#line 12 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+{
+#line 13 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float4 P   = mul ( In.Pos , i_matWorld ) ;
+#line 14 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Pos = mul ( P , g_matVP ) ;
+#line 15 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Colour = In.Colour ;
+#line 16 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.UV = In.UV ;
+#line 17 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+}
+
+#line 19 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+void p_n_c ( VS_IN_CLR_NORM In    , out PS_IN Out    )  
+#line 20 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+{
+#line 21 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float4 P   = mul ( In.Pos , i_matWorld ) ;
+#line 22 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Pos = mul ( P , g_matVP ) ;
+#line 25 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float4 N   = mul ( In.Norm , i_matWorld ) ;
+#line 26 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+N = normalize ( N ) ;
+#line 28 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float3 LightDirection   = normalize ( i_ConstantLightPos.xyz-P.xyz ) ;
+#line 29 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float DiffuseLight   = saturate ( dot ( N.xyz , normalize ( i_ConstantLightPos.xyz ) ) ) ;
+#line 31 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float3 Ambient   = float3 ( 0.2f, 0.2f, 0.2f ) ;
+#line 33 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Colour = float4 ( saturate ( ( In.Colour.rgb*DiffuseLight )+( In.Colour.rgb*Ambient ) ), In.Colour.a ) ;
+#line 34 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+}
+
+#line 36 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+void p_n_c_uv ( VS_IN_CLR_NORM_UV In    , out PS_IN_UV Out    )  
+#line 37 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+{
+#line 38 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float4 P   = mul ( In.Pos , i_matWorld ) ;
+#line 39 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Pos = mul ( P , g_matVP ) ;
+#line 42 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float4 N   = mul ( In.Norm , i_matWorld ) ;
+#line 43 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+N = normalize ( N ) ;
+#line 45 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float3 LightDirection   = normalize ( i_ConstantLightPos.xyz-P.xyz ) ;
+#line 46 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float DiffuseLight   = saturate ( dot ( N.xyz , normalize ( i_ConstantLightPos.xyz ) ) ) ;
+#line 48 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float3 Ambient   = float3 ( 0.2f, 0.2f, 0.2f ) ;
+#line 50 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Colour = float4 ( saturate ( ( In.Colour.rgb*DiffuseLight )+( In.Colour.rgb*Ambient ) ), In.Colour.a ) ;
+#line 52 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.UV = In.UV ;
+#line 53 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+}
+
+#line 54 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+void p_n_sc_uv ( VS_IN_NORM_UV In    , out PS_IN_UV Out    )  
+#line 55 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+{
+#line 56 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float4 P   = mul ( In.Pos , i_matWorld ) ;
+#line 57 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Pos = mul ( P , g_matVP ) ;
+#line 60 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float4 N   = mul ( In.Norm , i_matWorld ) ;
+#line 61 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+N = normalize ( N ) ;
+#line 63 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float3 LightDirection   = normalize ( i_ConstantLightPos.xyz-P.xyz ) ;
+#line 64 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float DiffuseLight   = saturate ( dot ( N.xyz , normalize ( i_ConstantLightPos.xyz ) ) ) ;
+#line 66 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float3 Ambient   = float3 ( 0.2f, 0.2f, 0.2f ) ;
+#line 68 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Colour = float4 ( saturate ( ( i_ConstantColour.rgb*DiffuseLight )+( i_ConstantColour.rgb*Ambient ) ), i_ConstantColour.a ) ;
+#line 70 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.UV = In.UV ;
+#line 71 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+}
+
+#line 72 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+void p_n_sc ( VS_IN_NORM In    , out PS_IN Out    )  
+#line 73 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+{
+#line 74 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float4 P   = mul ( In.Pos , i_matWorld ) ;
+#line 75 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Pos = mul ( P , g_matVP ) ;
+#line 78 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float4 N   = mul ( In.Norm , i_matWorld ) ;
+#line 79 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+N = normalize ( N ) ;
+#line 81 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float3 LightDirection   = normalize ( i_ConstantLightPos.xyz-P.xyz ) ;
+#line 82 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float DiffuseLight   = saturate ( dot ( N.xyz , normalize ( i_ConstantLightPos.xyz ) ) ) ;
+#line 84 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float3 Ambient   = float3 ( 0.2f, 0.2f, 0.2f ) ;
+#line 86 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Colour = float4 ( saturate ( ( i_ConstantColour.rgb*DiffuseLight )+( i_ConstantColour.rgb*Ambient ) ), i_ConstantColour.a ) ;
+#line 87 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+}
+
+#line 89 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+void p_sc_uv ( VS_IN_UV In    , out PS_IN_SC_UV Out    )  
+#line 90 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+{
+#line 91 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float4 P   = mul ( In.Pos , i_matWorld ) ;
+#line 92 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Pos = mul ( P , g_matVP ) ;
+#line 93 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.UV = In.UV ;
+#line 94 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Colour = i_ConstantColour ;
+#line 95 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+}
+
+#line 97 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+void p_sc ( VS_IN In    , out PS_IN_SC Out    )  
+#line 98 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+{
+#line 99 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float4 P   = mul ( In.Pos , i_matWorld ) ;
+#line 100 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Pos = mul ( P , g_matVP ) ;
+#line 101 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.Colour = i_ConstantColour ;
+#line 102 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+}
+
+#line 104 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+half4 SimpleDrawUVPS ( PS_IN_UV In    ) : COLOR 
+#line 105 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+{
+#line 106 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float4 col   = tex2D ( i_textureSampler , In.UV ) ;
+#line 107 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+col *= In.Colour ;
+#line 108 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+return col ;
+#line 109 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+}
+
+#line 110 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+half4 SimpleDrawUVSCPS ( PS_IN_SC_UV In    ) : COLOR 
+#line 111 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+{
+#line 112 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float4 col   = tex2D ( i_textureSampler , In.UV ) ;
+#line 113 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+col *= In.Colour ;
+#line 114 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+return col ;
+#line 115 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+}
+
+#line 116 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+half4 SimpleDrawPS ( PS_IN In    ) : COLOR 
+#line 117 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+{
+#line 118 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+return In.Colour ;
+#line 119 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+}
+
+#line 120 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+half4 SimpleDrawSCPS ( PS_IN_SC In    ) : COLOR 
+#line 121 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+{
+#line 122 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+return In.Colour ;
+#line 123 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+}
+
+#line 124 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+half4 NullPixelShader ( float4 Pos : POSITION   ) : COLOR 
+#line 125 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+{
+#line 126 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+return half4 ( 0, 0, 0, 0 ) ;
+#line 127 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+}
+
+#line 128 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+void DepthOnlyVS ( VS_IN In    , out float4 Out : POSITION   )  
+#line 129 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+{
+#line 130 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+float4 P   = mul ( In.Pos , i_matWorld ) ;
+#line 131 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out = mul ( P , g_matVP ) ;
+#line 132 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+Out.z = i_ConstantDepth.x*Out.w ;
+#line 133 "D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx"
+}
+</file>
+  <file id="1" path="D:/sk82/main/code/ng/render/shaders/Source/simpledraw.fx" time="01c93fcf-d0633a35" />
+ </files>
+ <tool name="Compiler">
+  <defines>
+   <define name="SHADER_FINAL" value="" />
+   <define name="rwgDEVICE_XBOX2" value="" />
+  </defines>
+  <arguments>
+   <argument name="/Zi" value="true" />
+   <argument name="/Vd" value="false" />
+   <argument name="/Xu0_deprecated" value="false" />
+   <argument name="/Odu_deprecated" value="false" />
+   <argument name="/XOd_" value="false" />
+   <argument name="/XOu" value="false" />
+   <argument name="/Xmaxtempreg" value="0" />
+   <argument name="PsSampBase" value="0" />
+   <argument name="PsSampCount" value="0" />
+   <argument name="VsSampBase" value="0" />
+   <argument name="VsSampCount" value="0" />
+   <argument name="VsInstCount" value="0" />
+   <argument name="PsInstCount" value="0" />
+   <argument name="/Od" value="false" />
+   <argument name="/Zpr" value="false" />
+   <argument name="/Zpc" value="false" />
+   <argument name="/Gpp" value="false" />
+   <argument name="/Op" value="false" />
+   <argument name="/Gfa" value="false" />
+   <argument name="/Gfp" value="false" />
+   <argument name="/XZc:zeroInit" value="false" />
+   <argument name="/XVe" value="false" />
+   <argument name="/Xbe:3-" value="false" />
+   <argument name="/Xbe:1-" value="false" />
+   <argument name="/XQInomaskedexports" value="false" />
+   <argument name="/XOautoz" value="false" />
+  </arguments>
+ </tool>
+ <shaders>
+  <shader entrypoint="SimpleDrawUVSCPS" target="ps_3_0" ZPass="0" pdbHint="4e4a0000-139956bf-d213bf96">
+   <constanttable>
+    <constant register="s0">
+     <type name="i_textureSampler" class="object" type="sampler2D" />
+    </constant>
+   </constanttable>
+   <sourcemap>
+    <statement pc="2" file="1" line="112" scope="-1" lastinstruction="0" />
+    <statement pc="0.1" file="1" line="112" scope="-1" lastinstruction="0" />
+    <statement pc="3" file="1" line="113" scope="-1" lastinstruction="0" />
+   </sourcemap>
+   <variables>
+   </variables>
+   <variableDebugInfo>
+   </variableDebugInfo>
+   <scopes>
+   </scopes>
+   <funcInfo>
+    <function id="0" name="DepthOnlyVS" retID="117">
+     <parameter id="115" />
+     <parameter id="116" />
+    </function>
+    <function id="1" name="NullPixelShader" retID="114">
+     <parameter id="113" />
+    </function>
+    <function id="2" name="SimpleDrawSCPS" retID="112">
+     <parameter id="111" />
+    </function>
+    <function id="3" name="SimpleDrawPS" retID="110">
+     <parameter id="109" />
+    </function>
+    <function id="4" name="SimpleDrawUVSCPS" retID="107">
+     <parameter id="106" />
+    </function>
+    <function id="5" name="SimpleDrawUVPS" retID="104">
+     <parameter id="103" />
+    </function>
+    <function id="6" name="p_sc" retID="101">
+     <parameter id="99" />
+     <parameter id="100" />
+    </function>
+    <function id="7" name="p_sc_uv" retID="97">
+     <parameter id="95" />
+     <parameter id="96" />
+    </function>
+    <function id="8" name="p_n_sc" retID="89">
+     <parameter id="87" />
+     <parameter id="88" />
+    </function>
+    <function id="9" name="p_n_sc_uv" retID="81">
+     <parameter id="79" />
+     <parameter id="80" />
+    </function>
+    <function id="10" name="p_n_c_uv" retID="73">
+     <parameter id="71" />
+     <parameter id="72" />
+    </function>
+    <function id="11" name="p_n_c" retID="65">
+     <parameter id="63" />
+     <parameter id="64" />
+    </function>
+    <function id="12" name="p_c_uv" retID="61">
+     <parameter id="59" />
+     <parameter id="60" />
+    </function>
+    <function id="13" name="p_c" retID="57">
+     <parameter id="55" />
+     <parameter id="56" />
+    </function>
+   </funcInfo>
+   <funcEntryExitInfo>
+   </funcEntryExitInfo>
+   <VfetchInfo>
+   </VfetchInfo>
+   <InterpolatorInfo>
+    <Interpolator Register="0" Semantic="0x50" Mask="xy" />
+    <Interpolator Register="1" Semantic="0x51" Mask="xyzw" />
+   </InterpolatorInfo>
+   <LiteralFloats>
+   </LiteralFloats>
+   <LiteralInts>
+   </LiteralInts>
+   <LiteralBools>
+   </LiteralBools>
+  </shader>
+ </shaders>
+</shader-pdb>

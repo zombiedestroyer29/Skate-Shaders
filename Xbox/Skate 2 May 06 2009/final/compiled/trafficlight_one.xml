@@ -1,0 +1,29 @@
+<File version="0.01.0">
+<Header vbCount="1" pbCount="1" tecCount="1"/>
+<VertexProgram>
+<Program id="0" size="892" name="trafficlight_one_defaultVS.vpo">
+</Program>
+</VertexProgram>
+<PixelProgram>
+<Program id="1" size="684" name="trafficlight_one_defaultPS.fpo">
+</Program>
+</PixelProgram>
+<Technique name="default">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="ALPHABLEND" value="false"/>
+		<State name="ALPHATESTENABLE" value="false"/>
+		<State name="COLORWRITE" value="RGB"/>
+		<State name="ZWRITEENABLE" value="true"/>
+		<State name="ZENABLE" value="true"/>
+		<Sampler name="i_diffuse">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+</File>

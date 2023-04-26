@@ -1,0 +1,53 @@
+<File version="0.01.0">
+<Header vbCount="1" pbCount="1" tecCount="1"/>
+<VertexProgram>
+<Program id="0" size="904" name="alphatestdefaultenvironment_defaultVS.vpo">
+</Program>
+</VertexProgram>
+<PixelProgram>
+<Program id="1" size="1240" name="alphatestdefaultenvironment_defaultPS.fpo">
+</Program>
+</PixelProgram>
+<Technique name="default">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="COLORWRITE" value="RGB"/>
+		<State name="ALPHATOMASKENABLE" value="false"/>
+		<State name="CCW_STENCILPASS" value="REPLACE"/>
+		<State name="ZENABLE" value="true"/>
+		<State name="CULLMODE" value="FRONT"/>
+		<State name="STENCILPASS" value="REPLACE"/>
+		<State name="ALPHABLEND" value="false"/>
+		<State name="ALPHATESTENABLE" value="true"/>
+		<State name="ZWRITEENABLE" value="true"/>
+		<State name="ALPHAFUNC" value="GREATEREQUAL"/>
+		<State name="ALPHAREF" value="30"/>
+		<Sampler name="i_lightmap">
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="ADDRESSU" value="CLAMP"/>
+			<SamplerState name="ADDRESSV" value="CLAMP"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+		</Sampler>
+		<Sampler name="i_chromaticity">
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="ADDRESSU" value="CLAMP"/>
+			<SamplerState name="ADDRESSV" value="CLAMP"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+		</Sampler>
+		<Sampler name="i_diffuse">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+</File>

@@ -1,0 +1,7 @@
+GXSetNumTexGens(6);
+GXSetTexCoordGen(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY);
+GXSetTexCoordGen2(GX_TEXCOORD1, GX_TG_MTX3x4, GX_TG_POS, GX_TEXMTX0, GX_FALSE, GX_PTTEXMTX0);		// DMO Areal Lightmap Projection
+GXSetTexCoordGen(GX_TEXCOORD2, GX_TG_MTX2x4, GX_TG_POS, GX_TEXMTX8);					// Shadow Plane
+GXSetTexCoordGen(GX_TEXCOORD3, GX_TG_MTX3x4, GX_TG_POS, GX_TEXMTX9);					// Shadow Projection
+GXSetTexCoordGen(GX_TEXCOORD4, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY);					// SPEC MAP
+GXSetTexCoordGen(GX_TEXCOORD5, GX_TG_SRTG, GX_TG_COLOR0, GX_IDENTITY);					// DMO Dynamic Lighting (for colorization)

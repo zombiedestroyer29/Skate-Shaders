@@ -1,0 +1,83 @@
+<File version="0.01.0">
+<Header vbCount="2" pbCount="2" tecCount="2"/>
+<VertexProgram>
+<Program id="0" size="1164" name="alphatestdynamicobject_defaultVS.vpo">
+</Program>
+<Program id="2" size="500" name="alphatestdynamicobject_simpleVS.vpo">
+</Program>
+</VertexProgram>
+<PixelProgram>
+<Program id="1" size="2736" name="alphatestdynamicobject_defaultPS.fpo">
+</Program>
+<Program id="3" size="288" name="alphatestdynamicobject_shadowPS.fpo">
+</Program>
+</PixelProgram>
+<Technique name="default">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="COLORWRITE" value="RGB"/>
+		<State name="ALPHATOMASKENABLE" value="false"/>
+		<State name="ZENABLE" value="true"/>
+		<State name="CULLMODE" value="FRONT"/>
+		<State name="ALPHABLEND" value="false"/>
+		<State name="ALPHATESTENABLE" value="true"/>
+		<State name="ZWRITEENABLE" value="true"/>
+		<State name="ALPHAFUNC" value="GREATEREQUAL"/>
+		<State name="ALPHAREF" value="30"/>
+		<Sampler name="i_normal">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+		<Sampler name="i_specular">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+		<Sampler name="i_environment">
+			<SamplerState name="MIPFILTER" value="POINT"/>
+			<SamplerState name="ADDRESSU" value="CLAMP"/>
+			<SamplerState name="ADDRESSW" value="CLAMP"/>
+			<SamplerState name="ADDRESSV" value="CLAMP"/>
+			<SamplerState name="MAGFILTER" value="LINEAR"/>
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MINFILTER" value="LINEAR"/>
+		</Sampler>
+		<Sampler name="i_diffuse">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+		<Sampler name="i_detail">
+			<SamplerState name="TRILINEARTHRESHOLD" value="THREEEIGHTHS"/>
+			<SamplerState name="MIPFILTER" value="LINEAR"/>
+			<SamplerState name="MINFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAGFILTER" value="ANISOTROPIC"/>
+			<SamplerState name="MAXANISOTROPY" value="4"/>
+		</Sampler>
+	</Pass>
+	</Technique>
+<Technique name="shadow">
+	<Pass id="0">
+		<VertexShader index="2"/>
+		<PixelShader index="3"/>
+		<State name="STENCILREF" value="255"/>
+		<State name="STENCILWRITEMASK" value="255"/>
+		<State name="COLORWRITE" value="0"/>
+		<State name="CCW_STENCILPASS" value="REPLACE"/>
+		<State name="CCW_STENCILWRITEMASK" value="255"/>
+		<State name="CCW_STENCILMASK" value="255"/>
+		<State name="STENCILMASK" value="255"/>
+		<State name="STENCILENABLE" value="True"/>
+		<State name="CULLMODE" value="BACK"/>
+		<State name="STENCILPASS" value="REPLACE"/>
+	</Pass>
+	</Technique>
+</File>

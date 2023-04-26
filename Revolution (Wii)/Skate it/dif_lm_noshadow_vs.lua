@@ -1,0 +1,4 @@
+GXSetNumChans(0);
+GXSetNumTexGens(2);
+GXSetTexCoordGen(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY);		// Diffuse
+GXSetTexCoordGen(GX_TEXCOORD1, GX_TG_MTX2x4, GX_TG_TEX1, GX_IDENTITY);		// LM

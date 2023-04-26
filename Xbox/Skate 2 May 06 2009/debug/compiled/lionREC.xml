@@ -1,0 +1,25 @@
+<File version="0.01.0">
+<Header vbCount="1" pbCount="1" tecCount="1"/>
+<VertexProgram>
+<Program id="0" size="472" name="lionREC_RenderVS.vpo">
+</Program>
+</VertexProgram>
+<PixelProgram>
+<Program id="1" size="360" name="lionREC_RenderPS.fpo">
+</Program>
+</PixelProgram>
+<Technique name="default">
+	<Pass id="0">
+		<VertexShader index="0"/>
+		<PixelShader index="1"/>
+		<State name="DESTBLEND" value="INVSRCALPHA"/>
+		<State name="SRCBLEND" value="SRCALPHA"/>
+		<State name="ZENABLE" value="true"/>
+		<State name="ALPHABLEND" value="true"/>
+		<State name="ALPHATESTENABLE" value="true"/>
+		<State name="ZWRITEENABLE" value="false"/>
+		<State name="ALPHAFUNC" value="GREATEREQUAL"/>
+		<State name="ALPHAREF" value="1"/>
+	</Pass>
+	</Technique>
+</File>
